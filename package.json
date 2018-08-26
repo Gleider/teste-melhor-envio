@@ -1,0 +1,21 @@
+{
+  "name": "teste-me-backend",
+  "version": "1.0.0",
+  "description": "Teste que faz parte do processo seletivo da empresa Melhor Envio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gleider",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.3"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.2.9"
+  }
+}

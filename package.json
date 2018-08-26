@@ -4,7 +4,7 @@
   "description": "Teste que faz parte do processo seletivo da empresa Melhor Envio",
   "main": "./bin/server.js",
   "scripts": {
-    "start" : "nodemon ./bin/server.js"
+    "start": "nodemon ./bin/server.js"
   },
   "author": "Gleider",
   "license": "MIT",
@@ -15,6 +15,7 @@
     "nodemon": "^1.18.3"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "mongoose": "^5.2.9"
   }

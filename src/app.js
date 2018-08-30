@@ -7,9 +7,11 @@ const router = express.Router()
 
 mongoose.connect('mongodb://gleider:gleider123@ds133262.mlab.com:33262/melhor_envio',
   { useNewUrlParser: true})
+
+require('./models/produtoModel')
 //Rotas
 const index = require('./routes/index')
-const personRoute = require('./routes/produtoRoute')
+const produtoRoute = require('./routes/produtoRoute')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -17,6 +19,6 @@ app.use(bodyParser.urlencoded({
 }))
 
 app.use('/', index)
-app.use('/persons', personRoute)
+app.use('/produtos', produtoRoute)
 
 module.exports = app

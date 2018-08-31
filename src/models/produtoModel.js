@@ -36,15 +36,18 @@ const produtoSchema = new Schema({
 const caixaSchema = new Schema({
   altura: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
   largura: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
   comprimento: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   }
 })
 
@@ -52,7 +55,8 @@ const empacotamentoSchema = new Schema({
   produtos: [produtoSchema],
   caixas: [caixaSchema],
   limiteCaixas: {
-    type: Number
+    type: Number,
+    default: 0
   }
 })
 

@@ -12,7 +12,6 @@ exports.get = (req, res, next) => {
 
 exports.post = (req, res, next) => {
   let produto = new Produto(req.body)
-  console.log(produto)
   produto
     .save()
     .then(data => {

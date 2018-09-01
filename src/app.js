@@ -12,6 +12,7 @@ require('./models/produtoModel')
 //Rotas
 const index = require('./routes/index')
 const produtoRoute = require('./routes/produtoRoute')
+const comprarRoute = require('./routes/comprarRoute')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -20,5 +21,6 @@ app.use(bodyParser.urlencoded({
 
 app.use('/', index)
 app.use('/produtos', produtoRoute)
+app.use('/comprar', comprarRoute)
 
 module.exports = app

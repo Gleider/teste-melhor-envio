@@ -4,7 +4,8 @@
   "description": "Teste que faz parte do processo seletivo da empresa Melhor Envio",
   "main": "./bin/server.js",
   "scripts": {
-    "start": "nodemon ./bin/server.js"
+    "start": "nodemon ./bin/server.js",
+    "test": "./node_modules/.bin/mocha --timeout 10000 tests/**/*.spec.js"
   },
   "author": "Gleider",
   "license": "MIT",

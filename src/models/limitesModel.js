@@ -1,3 +1,5 @@
+/** Modelo dos limites de cada transportadora*/
+
 exports.correios = {
   pesoMin: 0,
   pesoMax: 30000,

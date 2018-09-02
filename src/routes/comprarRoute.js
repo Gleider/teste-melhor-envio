@@ -2,9 +2,7 @@ const express = require('express')
 const router = express.Router()
 const controller = require('../controllers/comprarController')
 
-// router.get('/', controller.get)
+/** Rota para para enviar informações sobre os produtos */
 router.post('/', controller.post)
-// router.put('/:id', controller.put)
-// router.delete('/', controller.delete)
 
 module.exports = router

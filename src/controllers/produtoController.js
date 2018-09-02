@@ -1,3 +1,5 @@
+/** Controle dos produtos que são registrados no banco de dados */
+
 const mongoose = require('mongoose')
 const Produto = mongoose.model('Produto')
 
@@ -19,7 +21,6 @@ exports.post = (req, res, next) => {
     }).catch(erro => {
       res.status(400).send({ message: "Falha ao cadastrar", data : erro })
     })
-
 }
 
 exports.put = (req, res, next) => {

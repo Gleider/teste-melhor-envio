@@ -1,3 +1,5 @@
+/** Modelo dos produtos que são analisados */
+
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 

@@ -2,11 +2,11 @@ const mongoose = require('mongoose')
 const Produto = mongoose.model('Produto')
 
 exports.get = (req, res, next) => {
-  Produto.find({}, 'codigo quantidade volumes')
+  Produto.find({}, 'limiteCaixas produtos caixas')
     .then(data => {
       res.status(200).send(data)
     }).catch(erro => {
-      res.status(400).send({ data : erro})
+      res.status(400).send({ data : erro })
     })
 }
 
@@ -15,9 +15,9 @@ exports.post = (req, res, next) => {
   produto
     .save()
     .then(data => {
-      res.status(201).send({ message : "Produto cadastrado com sucesso"})
+      res.status(201).send({ message : "Produto cadastrado com sucesso" })
     }).catch(erro => {
-      res.status(400).send({ message: "Falha ao cadastrar", data : erro})
+      res.status(400).send({ message: "Falha ao cadastrar", data : erro })
     })
 
 }

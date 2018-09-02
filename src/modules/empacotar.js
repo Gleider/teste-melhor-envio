@@ -7,24 +7,11 @@ function maxDimensao(produtos, dimensao){
     .reduce((x, y) => Math.max(x, y))
 }
 
-function infoCompleta() {
-
-}
-
-function limiteProduto() {
-
-}
-
-function caixaDisponivel() {
-
-}
-
-function semInfo(data) {
+function verificaMedidas(data) {
   let maxComprimento = maxDimensao(data.produtos, 'comprimento')
   let maxLargura = maxDimensao(data.produtos, 'largura')
   let maxAltura = maxDimensao(data.produtos, 'altura')
   let maxPeso = maxDimensao(data.produtos, 'peso')
-
   
   if(maxPeso > limiteModels.correios.pesoMax) {
     return {erro: "O produto possui peso maior do que o suportado pelos correios"}
@@ -39,16 +26,151 @@ function semInfo(data) {
     return {erro: "O produto possui comprimento maior do que o suportado pelos correios."}
   }
 
-  if(maxAltura < limiteModels.correios.alturaMin){
+  if(maxAltura < limiteModels.correios.alturaMin) {
     maxAltura = limiteModels.correios.alturaMin
   }
-  if(maxLargura < limiteModels.correios.larguraMin){
+  if(maxLargura < limiteModels.correios.larguraMin) {
     maxLargura = limiteModels.correios.larguraMin
   }
-  if(maxComprimento < limiteModels.correios.ComprimentoMin){
+  if(maxComprimento < limiteModels.correios.ComprimentoMin) {
     maxComprimento = limiteModels.correios.ComprimentoMin
   }
+  return [maxComprimento, maxLargura, maxAltura, maxPeso]
+}
 
+function caixaMap(data) {
+  const { Item, Bin, Packer } = BinPacking3D
+  let lista = []
+  data.caixas.map(caixa => {
+    
+    let altura = caixa.altura
+    let largura = caixa.largura
+    let comprimento = caixa.comprimento
+    let peso = limiteModels.correios.pesoMax
+
+    let bin1 = new Bin("correios", comprimento, altura, largura, peso)
+    let packer = new Packer()
+    packer.addBin(bin1)
+
+    data.produtos.map((produto) => {
+      for(let i = 0; i < produto.quantidade; i++){
+        packer.addItem(new Item(
+          produto.codigo, 
+          produto.volumes.comprimento, 
+          produto.volumes.altura,
+          produto.volumes.largura,
+          produto.volumes.peso))
+      }
+    })
+    packer.pack()
+    
+    if (packer.unfitItems.length === 0) {
+      lista.push(packer)
+      return
+    }
+
+  })
+  return lista
+}
+
+function produtoMap(data, packer) {
+  const { Item, Bin, Packer } = BinPacking3D
+  let cont = 0
+  let limite = data.limiteCaixas
+  let caixas = []
+  data.produtos.map(produto => {
+    for(let i = 0; i < produto.quantidade; i++){
+      packer.addItem(new Item(
+        produto.codigo, 
+        produto.volumes.comprimento, 
+        produto.volumes.altura,
+        produto.volumes.largura,
+        produto.volumes.peso))
+      cont += 1
+      if (cont === limite) {
+        cont = 0
+        packer.pack()
+        caixas.push(packer)
+        packer = []
+        bin1 = []
+        bin1 = new Bin("correios", limiteModels.correios.comprimentoMax, limiteModels.correios.alturaMax, limiteModels.correios.larguraMax, limiteModels.correios.pesoMax)
+        packer = new Packer()
+        packer.addBin(bin1)
+      }
+    }
+  })
+  
+  return caixas
+}
+function infoCompleta(data) { // fazendo
+  // let caixas = []
+  // let cont = 0
+  // let medidas = verificaMedidas(data)
+
+  // const { Item, Bin, Packer } = BinPacking3D
+
+  // let bin1 = new Bin("correios", limiteModels.correios.comprimentoMax, limiteModels.correios.alturaMax, limiteModels.correios.larguraMax, limiteModels.correios.pesoMax)
+  // let packer = new Packer()
+  // packer.addBin(bin1)
+
+  // if(medidas.erro) {
+  //   return medidas
+  // }
+
+  // caixas = produtoMap(data, packer)
+  // if (packer.items.length !== 0){
+  //   packer.pack()
+  //   caixas.push(packer)
+  // }
+  return {erro:"error"}
+}
+
+function limiteProduto(data) {
+  let caixas = []
+  let cont = 0
+  let medidas = verificaMedidas(data)
+
+  const { Item, Bin, Packer } = BinPacking3D
+
+  let bin1 = new Bin("correios", limiteModels.correios.comprimentoMax, limiteModels.correios.alturaMax, limiteModels.correios.larguraMax, limiteModels.correios.pesoMax)
+  let packer = new Packer()
+  packer.addBin(bin1)
+
+  if(medidas.erro) {
+    return medidas
+  }
+
+  caixas = produtoMap(data, packer)
+  if (packer.items.length !== 0){
+    packer.pack()
+    caixas.push(packer)
+  }
+
+  return caixas
+}
+
+function caixaDisponivel(data) {
+  let lista = []
+  
+  lista = caixaMap(data)
+
+  if(lista.length == 0) {
+    return {erro: "Os produtos não cabem em nenhuma das caixas disponíveis"}
+  }
+  return lista
+}
+
+function semInfo(data) {
+
+  let medidas = verificaMedidas(data)
+  if(medidas.erro) {
+    return medidas
+  }
+
+  let maxComprimento = medidas[0]
+  let maxLargura = medidas[1]
+  let maxAltura = medidas[2]
+  
   const { Item, Bin, Packer } = BinPacking3D
 
   do {
@@ -63,10 +185,10 @@ function semInfo(data) {
           produto.volumes.altura,
           produto.volumes.largura,
           produto.volumes.peso))
+        
       }
     })
     packer.pack()
-    // console.log(packer)
     if (packer.unfitItems.length == 0) {
       return packer
     }
@@ -86,12 +208,10 @@ function semInfo(data) {
     }
 
   } while(true)
-  // console.log("unfited:", packer.unfitItems)
 
 }
 
-function geraNovoData(info){
-  // info.map((dado) => console.log(dado.name))
+function geraNovoData(info, dataAnterior){
   prod = []
   info.map((dado) => {
     prod.push(
@@ -108,28 +228,38 @@ function geraNovoData(info){
     )
   })
   data = {
+    limiteCaixas: dataAnterior.limiteCaixas,
     produtos: prod
   }
   return data
 }
-
 
 exports.entrada = function(data) {
   let listPack = []
   if (data.limiteCaixas === 0 && data.caixas.length === 0) {
     while(true) {
       const pack = semInfo(data)
+      if (pack.erro){
+        return pack
+      }
       listPack.push(pack)
+
       if(pack.unfitItems.length === 0){
-        // console.log(listPack[1].bins[0].items)
         return listPack
       }
-      data = geraNovoData(pack.unfitItems)
-      
+      data = geraNovoData(pack.unfitItems, data)
     }
-    // console.log(pack.unfitItems)
-    // console.log(data.produtos)
-    return pack
+
   }
+  if (data.limiteCaixas !== 0 && data.caixas.length === 0) {
+    data = limiteProduto(data)
+    return data
+  }
+
+  if (data.limiteCaixas === 0 && data.caixas.length !== 0) {
+    data = caixaDisponivel(data)
+    return data
+  }
+  data = infoCompleta(data)
   return data
 }

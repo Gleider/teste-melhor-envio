@@ -5,7 +5,7 @@
   "main": "./bin/server.js",
   "scripts": {
     "start": "nodemon ./bin/server.js",
-    "test": "./node_modules/.bin/mocha --timeout 10000 tests/**/*.spec.js"
+    "test": "./node_modules/.bin/mocha --timeout 30000 tests/**/*.spec.js"
   },
   "author": "Gleider",
   "license": "MIT",

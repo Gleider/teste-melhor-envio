@@ -41,18 +41,49 @@ Já que o objetivo é o envio de produtos e o retorno da quantidade de caixas, e
 #### Exemplo 1: 
 Enviando 1 produto:
 
+![Imagem 1](./img/ex1.1.png)
+
 Resposta:
+
+![Imagem 2](./img/ex1.2.png)
+
+*A resposta é maior do que mostrada na imagem
 
 #### Exemplo 2:
 Enviando 3 produtos e com limite de 10 itens por caixa:
 
+![Imagem 3](./img/ex2.1.png)
+
 Resposta:
+
+![Imagem 4](./img/ex2.2.png)
+
+*A resposta é maior do que mostrada na imagem
 
 #### Exemplo 3:
 Enviando 1 produto com limite de 5 itens por caixa e enviando 2 configurações de caixa:
 
+![Imagem 5](./img/ex3.1.png)
+
 Resposta:
+
+![Imagem 6](./img/ex3.2.png)
+
+*A resposta é maior do que mostrada na imagem
+
 #### Exemplo 4:
 Enviando 1 produto ultrapassando o limite dos correios e da jadlog
 
+![Imagem 7](./img/ex4.1.png)
+
 Resposta:
+
+![Imagem 8](./img/ex4.2.png)
+
+*A resposta é maior do que mostrada na imagem
+
+### O que faltou no teste
+- Refatorar os algoritmos de empacotamento para que fossem mais eficientes.
+- Criar mais casos de testes
+- Tratar de maneira mais clara os erros.
+- Criar uma documentação com mais detalhes e mais organizada.

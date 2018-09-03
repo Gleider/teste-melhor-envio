@@ -37,7 +37,9 @@ Os dados estão armazenados no servidor do mLab, então não precisa baixar os d
 
 ### Testar no postman
 Duas rotas podem ser testadas:
+
 http://localhost:3000/comprar : Enviar os produtos e receber a quantidade de caixas e os produtos
+
 http://localhost:3000/produtos : Registrar um novo produto no banco de dados
 
 Já que o objetivo é o envio de produtos e o retorno da quantidade de caixas, então a única rota que será mostrada as operações é a de comprar e sempre será utilizado o método POST.
@@ -91,3 +93,10 @@ Resposta:
 - Criar mais casos de testes
 - Tratar de maneira mais clara os erros.
 - Criar uma documentação com mais detalhes e mais organizada.
+
+## Referências utilizadas para o desenvolvimento
+https://github.com/olragon/binpackingjs#readme
+
+https://mochajs.org/
+
+https://www.w3schools.com/jsref/

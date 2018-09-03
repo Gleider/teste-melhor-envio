@@ -42,7 +42,7 @@ http://localhost:3000/comprar : Enviar os produtos e receber a quantidade de cai
 
 http://localhost:3000/produtos : Registrar um novo produto no banco de dados
 
-Já que o objetivo é o envio de produtos e o retorno da quantidade de caixas, então a única rota que será mostrada as operações é a de comprar e sempre será utilizado o método POST.
+Já que o objetivo é o envio de produtos e o retorno da quantidade de caixas (e seus itens), então a única rota que será mostrada abaixo é a de comprar. Sempre será utilizado o método POST.
 
 #### Exemplo 1: 
 Enviando 1 produto:

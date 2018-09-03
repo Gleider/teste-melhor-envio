@@ -4,12 +4,16 @@ Os arquivos estão divididos no padrão MVC.
 ## Informações sobre o desenvolvimento
 ### Tecnologias
 **NodeJS**
+
 **MongoDB**
 
 ### Ferramentas
 **VSCode:** Utilizado para programar
+
 **Studio 3T:** Utilizado para consultar os dados no banco de dados
+
 **Postman:** Utilizado para testar as rotas, requisições e respostas
+
 **mLab:** Ferramenta online para armazenar dados em MongoDB
 
 ## Como testar
